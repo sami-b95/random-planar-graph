@@ -1,3 +1,5 @@
+from functools import cmp_to_key
+
 def triangulate(nodes, randstream, mode='conform'):
 	if mode=='pyhull':
 		tris = triangulate_pyhull(nodes, randstream)
@@ -20,7 +22,7 @@ def sorter(tri1, tri2):
 		return 0
 
 def canonical_order(tris):
-	return sorted(list(tris), cmp=sorter)
+	return sorted(list(tris), key=cmp_to_key(sorter))
 
 def triangulate_pyhull(nodes, randstream):
 	import pyhull.delaunay
